@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microservice.userservice.entity.User;
 import com.microservice.userservice.service.UserService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/users")
+@Slf4j
 public class UserController {
 
 	private UserService userservice;
@@ -30,7 +33,7 @@ public class UserController {
 	@PostMapping("/create")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		User users = userservice.saveUser(user);
-
+		log.info("This is an info log message");
 		return ResponseEntity.status(HttpStatus.CREATED).body(users);
 
 	}

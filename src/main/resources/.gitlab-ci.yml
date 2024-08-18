@@ -1,0 +1,32 @@
+stages:
+  - build
+  - test
+  - sonarcloud
+
+# Build job example
+build:
+  stage: build
+  script:
+    - echo "Building the project..."
+    - ./mvnw clean install  # Adjust if using the Maven wrapper
+
+# Test job example
+test:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - ./mvnw test  # Adjust if using the Maven wrapper
+
+# SonarCloud analysis job
+sonarcloud:
+  stage: sonarcloud
+  script:
+    - echo "Running SonarCloud analysis..."
+    - ./mvnw verify sonar:sonar \
+        -Dsonar.projectKey=nkrcivil19 \
+        -Dsonar.organization=nkrcivil19 \
+        -Dsonar.host.url=https://sonarcloud.io \
+        -Dsonar.login=$SONAR_TOKEN
+  only:
+    - merge_requests
+  allow_failure: false
