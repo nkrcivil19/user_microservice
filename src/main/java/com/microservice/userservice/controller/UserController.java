@@ -51,7 +51,6 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<List<User>> getAllUser() {
 		List<User> alluser = userservice.getAllUser();
-
 		return ResponseEntity.ok(alluser);
 	}
 
@@ -60,7 +59,6 @@ public class UserController {
 	public ResponseEntity<Void> deleteUser(@RequestParam String id) {
 		boolean delete = userservice.deleteUser(id);
 		if (delete) {
-
 			return ResponseEntity.ok().build();
 		} else
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -82,4 +80,5 @@ public class UserController {
 				: ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(updateuser);
 	}
 
+	
 }
